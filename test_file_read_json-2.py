@@ -5,7 +5,7 @@ import json
 import io, sys
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-file = open('test_simple_search-1_result-2.json', 'r', encoding='utf-8')
+file = open('test_simple_search-2_result-1.json', 'r', encoding='utf-8')
 
 #data = file.read()
 data = json.load(file)

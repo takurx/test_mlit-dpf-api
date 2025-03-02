@@ -1,5 +1,6 @@
 import streamlit as st
-import leafmap.foliumap as lfmap
+import folium
+from streamlit_folium import folium_static
 import json
 import pandas as pd
 import requests
@@ -64,15 +65,20 @@ with tab1:
         center_lat = df_json["lat"].mean()
         center_lon = df_json["lon"].mean()
         
-        m_json = lfmap.Map(center=(center_lat, center_lon), zoom=10)
+        m_json = folium.Map(location=[center_lat, center_lon], zoom_start=10)
         
         # Add points to the map
         for _, row in df_json.iterrows():
-            popup = f"<b>{row['title']}</b><br>Latitude: {row['lat']}<br>Longitude: {row['lon']}"
-            m_json.add_marker(location=(row['lat'], row['lon']), popup=popup)
+            popup_text = f"<b>{row['title']}</b><br>Latitude: {row['lat']}<br>Longitude: {row['lon']}"
+            folium.Marker(
+                location=[row['lat'], row['lon']],
+                popup=folium.Popup(popup_text, max_width=300),
+                tooltip=row['title'],
+                icon=folium.Icon(icon="info-sign", prefix="fa", color="blue")
+            ).add_to(m_json)
         
         # Display the map
-        m_json.to_streamlit(height=600)
+        folium_static(m_json, height=600)
     else:
         st.error("No valid location data found in the JSON file.")
 
@@ -108,20 +114,31 @@ with tab2:
             center_lat = df_kyun["lat"].mean()
             center_lon = df_kyun["lon"].mean()
             
-            m_kyun = lfmap.Map(center=(center_lat, center_lon), zoom=10)
+            m_kyun = folium.Map(location=[center_lat, center_lon], zoom_start=10)
+            
+            # Add a title to the map
+            title_html = '''
+            <h3 align="center" style="font-size:16px"><b>つくば市内キョン目撃情報マップ</b></h3>
+            '''
+            m_kyun.get_root().html.add_child(folium.Element(title_html))
             
             # Add points to the map with custom styling for Kyun sightings
             for _, row in df_kyun.iterrows():
-                popup = f"<b>{row['name']}</b><br>{row['description']}<br>Latitude: {row['lat']}<br>Longitude: {row['lon']}"
-                m_kyun.add_marker(
-                    location=(row['lat'], row['lon']), 
-                    popup=popup,
-                    icon_name="deer",
-                    icon_color="orange"
-                )
+                popup_text = f"""
+                <b>{row['name']}</b><br>
+                {row['description']}<br>
+                緯度: {row['lat']}<br>
+                経度: {row['lon']}
+                """
+                folium.Marker(
+                    location=[row['lat'], row['lon']],
+                    popup=folium.Popup(popup_text, max_width=300),
+                    tooltip=row['name'],
+                    icon=folium.Icon(icon="paw", prefix="fa", color="orange")
+                ).add_to(m_kyun)
             
             # Display the map
-            m_kyun.to_streamlit(height=600)
+            folium_static(m_kyun, height=600)
         else:
             st.error("No valid location data found in the Kyun API response.")
     else:
@@ -151,40 +168,57 @@ with tab3:
             center_lon = df_kyun["lon"].mean()
         
         # Create a combined map
-        m_combined = lfmap.Map(center=(center_lat, center_lon), zoom=9)
+        m_combined = folium.Map(location=[center_lat, center_lon], zoom_start=9)
         
-        # Add legend to the map
-        legend_dict = {}
+        # Add a title to the map
+        title_html = '''
+        <h3 align="center" style="font-size:16px"><b>Combined Geographic Visualization</b></h3>
+        '''
+        m_combined.get_root().html.add_child(folium.Element(title_html))
         
         # Add JSON data points to the map if available
         if has_json_data:
-            legend_dict["JSON Data"] = "blue"
             for _, row in df_json.iterrows():
-                popup = f"<b>{row['title']}</b><br>Latitude: {row['lat']}<br>Longitude: {row['lon']}"
-                m_combined.add_marker(
-                    location=(row['lat'], row['lon']), 
-                    popup=popup,
-                    icon_name="info-sign",
-                    icon_color="blue"
-                )
+                popup_text = f"<b>{row['title']}</b><br>Latitude: {row['lat']}<br>Longitude: {row['lon']}"
+                folium.Marker(
+                    location=[row['lat'], row['lon']],
+                    popup=folium.Popup(popup_text, max_width=300),
+                    tooltip=row['title'],
+                    icon=folium.Icon(icon="info-sign", prefix="fa", color="blue")
+                ).add_to(m_combined)
         
         # Add Kyun data points to the map if available
         if has_kyun_data:
-            legend_dict["Kyun Sightings"] = "orange"
             for _, row in df_kyun.iterrows():
-                popup = f"<b>{row['name']}</b><br>{row['description']}<br>Latitude: {row['lat']}<br>Longitude: {row['lon']}"
-                m_combined.add_marker(
-                    location=(row['lat'], row['lon']), 
-                    popup=popup,
-                    icon_name="deer",
-                    icon_color="orange"
-                )
+                popup_text = f"""
+                <b>{row['name']}</b><br>
+                {row['description']}<br>
+                緯度: {row['lat']}<br>
+                経度: {row['lon']}
+                """
+                folium.Marker(
+                    location=[row['lat'], row['lon']],
+                    popup=folium.Popup(popup_text, max_width=300),
+                    tooltip=row['name'],
+                    icon=folium.Icon(icon="paw", prefix="fa", color="orange")
+                ).add_to(m_combined)
         
-        # Add the legend
-        m_combined.add_legend(title="Data Sources", legend_dict=legend_dict)
+        # Add a legend to the map
+        legend_html = '''
+        <div style="position: fixed; 
+            bottom: 50px; right: 50px; z-index: 1000;
+            background-color: white; padding: 10px; 
+            border: 2px solid grey; border-radius: 5px;
+            font-size: 14px;">
+            <p><b>Data Sources</b></p>
+            <p><i class="fa fa-info-sign fa-2x" style="color:blue"></i> JSON Data</p>
+            <p><i class="fa fa-paw fa-2x" style="color:orange"></i> Kyun Sightings</p>
+        </div>
+        '''
+        m_combined.get_root().html.add_child(folium.Element(legend_html))
         
         # Display the map
-        m_combined.to_streamlit(height=700)
+        folium_static(m_combined, height=700)
         
         # Add timestamp
         st.caption(f"Map generated at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")

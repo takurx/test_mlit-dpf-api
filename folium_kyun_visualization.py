@@ -52,7 +52,9 @@ def fetch_mlit_data(keyword, lat, lon, range_val, api_key):
     """ % (keyword, top, left, bottom, right)
 
     # APIを呼び出して結果を準備する。
-    end_point = "https://www.mlit-data.jp/api/v1/"
+    #end_point = "https://www.mlit-data.jp/api/v1/"
+    #end_point = "http://localhost:8001/services/dpf_service/"
+    end_point = "http://localhost:8000/dpf_mock/"
     response = requests.post(
         end_point,
         headers={
@@ -65,9 +67,10 @@ def fetch_mlit_data(keyword, lat, lon, range_val, api_key):
 
 # Function to fetch data from Kyun API
 @st.cache_data(ttl=300)  # Cache data for 5 minutes
-def fetch_kyun_data(api_url="http://localhost:5000/api/kyun/sightings"):
+# def fetch_kyun_data(api_url="http://localhost:5000/api/kyun/sightings"):
+def fetch_kyun_data(api_url="http://localhost:8000/kyon_mock"):
     try:
-        response = requests.get(api_url)
+        response = requests.get(api_url)    
         response.raise_for_status()  # Raise an exception for HTTP errors
         return response.json()
     except requests.exceptions.RequestException as e:

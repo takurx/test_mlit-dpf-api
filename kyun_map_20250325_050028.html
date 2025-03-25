@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e64c7baece2063f0d7395fc9a8514847 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+        <h3 align="center" style="font-size:16px"><b>つくば市内キョン目撃情報マップ</b></h3>
+        
+    
+            <div class="folium-map" id="map_e64c7baece2063f0d7395fc9a8514847" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_e64c7baece2063f0d7395fc9a8514847 = L.map(
+                "map_e64c7baece2063f0d7395fc9a8514847",
+                {
+                    center: [36.11569643333333, 140.08466235],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_cbbca263c36cd3c9ad262c89e085a52c = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_e64c7baece2063f0d7395fc9a8514847);
+        
+    
+            var marker_f29d69c8d3d9148fe97e0665fcc0a16c = L.marker(
+                [36.1044419, 140.118946],
+                {}
+            ).addTo(map_e64c7baece2063f0d7395fc9a8514847);
+        
+    
+            var icon_88db1c8542eae5dad64fefd25fd4ec56 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "deer", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_f29d69c8d3d9148fe97e0665fcc0a16c.setIcon(icon_88db1c8542eae5dad64fefd25fd4ec56);
+        
+    
+        var popup_903cb39aa2796cfdd2c44697e87f0466 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_99480f5a6c579a157571145a22bec2d9 = $(`<div id="html_99480f5a6c579a157571145a22bec2d9" style="width: 100.0%; height: 100.0%;">             <b>柴崎</b><br>             令和6年(2024年)5月9日 	つくば市柴崎地内<br>             緯度: 36.1044419<br>             経度: 140.118946             </div>`)[0];
+                popup_903cb39aa2796cfdd2c44697e87f0466.setContent(html_99480f5a6c579a157571145a22bec2d9);
+            
+        
+
+        marker_f29d69c8d3d9148fe97e0665fcc0a16c.bindPopup(popup_903cb39aa2796cfdd2c44697e87f0466)
+        ;
+
+        
+    
+    
+            marker_f29d69c8d3d9148fe97e0665fcc0a16c.bindTooltip(
+                `<div>
+                     柴崎
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d7dcf49477c21ec0d75a2800faa1c4f7 = L.marker(
+                [36.0105083, 140.0707048],
+                {}
+            ).addTo(map_e64c7baece2063f0d7395fc9a8514847);
+        
+    
+            var icon_8832d22eaa3afea7631d56df44703ddb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "deer", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_d7dcf49477c21ec0d75a2800faa1c4f7.setIcon(icon_8832d22eaa3afea7631d56df44703ddb);
+        
+    
+        var popup_5ff3a2cbebf1d75d01f7b0744a0a1e51 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_b7ffdf39ece3ab8ed65d9b7b0b49c233 = $(`<div id="html_b7ffdf39ece3ab8ed65d9b7b0b49c233" style="width: 100.0%; height: 100.0%;">             <b>みどりの東</b><br>             令和6年(2024年)5月9日 	つくば市みどりの東地内<br>             緯度: 36.0105083<br>             経度: 140.0707048             </div>`)[0];
+                popup_5ff3a2cbebf1d75d01f7b0744a0a1e51.setContent(html_b7ffdf39ece3ab8ed65d9b7b0b49c233);
+            
+        
+
+        marker_d7dcf49477c21ec0d75a2800faa1c4f7.bindPopup(popup_5ff3a2cbebf1d75d01f7b0744a0a1e51)
+        ;
+
+        
+    
+    
+            marker_d7dcf49477c21ec0d75a2800faa1c4f7.bindTooltip(
+                `<div>
+                     みどりの東
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c4dcfd3977ded2edcc2f5633cb7744f7 = L.marker(
+                [36.0990598, 140.1233394],
+                {}
+            ).addTo(map_e64c7baece2063f0d7395fc9a8514847);
+        
+    
+            var icon_3b68da053fe78a9c751006798a06b6f3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "deer", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_c4dcfd3977ded2edcc2f5633cb7744f7.setIcon(icon_3b68da053fe78a9c751006798a06b6f3);
+        
+    
+        var popup_22fcdf4a23eec30f4b0ac9d2f8a2cdbd = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_6c0ad7196addce9c78d5d5be29fdf42f = $(`<div id="html_6c0ad7196addce9c78d5d5be29fdf42f" style="width: 100.0%; height: 100.0%;">             <b>流星台</b><br>             令和6年(2024年)5月19日 	つくば市流星台地内<br>             緯度: 36.0990598<br>             経度: 140.1233394             </div>`)[0];
+                popup_22fcdf4a23eec30f4b0ac9d2f8a2cdbd.setContent(html_6c0ad7196addce9c78d5d5be29fdf42f);
+            
+        
+
+        marker_c4dcfd3977ded2edcc2f5633cb7744f7.bindPopup(popup_22fcdf4a23eec30f4b0ac9d2f8a2cdbd)
+        ;
+
+        
+    
+    
+            marker_c4dcfd3977ded2edcc2f5633cb7744f7.bindTooltip(
+                `<div>
+                     流星台
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_78e8f3b41435fe9a6117f8dc8a8a0797 = L.marker(
+                [36.150161, 140.0726882],
+                {}
+            ).addTo(map_e64c7baece2063f0d7395fc9a8514847);
+        
+    
+            var icon_4fe8296dd4e509d50ae421ec5f60b2f0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "deer", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_78e8f3b41435fe9a6117f8dc8a8a0797.setIcon(icon_4fe8296dd4e509d50ae421ec5f60b2f0);
+        
+    
+        var popup_1bbecc61ff7b734f7182b731181b26c9 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_3c122db804d918ec2790b6b44ac07d6f = $(`<div id="html_3c122db804d918ec2790b6b44ac07d6f" style="width: 100.0%; height: 100.0%;">             <b>大穂</b><br>             令和6年(2024年)6月3日 	つくば市大穂地内<br>             緯度: 36.150161<br>             経度: 140.0726882             </div>`)[0];
+                popup_1bbecc61ff7b734f7182b731181b26c9.setContent(html_3c122db804d918ec2790b6b44ac07d6f);
+            
+        
+
+        marker_78e8f3b41435fe9a6117f8dc8a8a0797.bindPopup(popup_1bbecc61ff7b734f7182b731181b26c9)
+        ;
+
+        
+    
+    
+            marker_78e8f3b41435fe9a6117f8dc8a8a0797.bindTooltip(
+                `<div>
+                     大穂
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_14ce8d105b7edaaadfd1c342522aef4e = L.marker(
+                [36.1471948, 140.0136323],
+                {}
+            ).addTo(map_e64c7baece2063f0d7395fc9a8514847);
+        
+    
+            var icon_ebdebe4b3f18e27f6b7b4f5461e8da8e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "deer", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_14ce8d105b7edaaadfd1c342522aef4e.setIcon(icon_ebdebe4b3f18e27f6b7b4f5461e8da8e);
+        
+    
+        var popup_540ef1bbe8bbba68d23355eed4f67754 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_572129d927b6bf3ecaa17ff4be4cae3a = $(`<div id="html_572129d927b6bf3ecaa17ff4be4cae3a" style="width: 100.0%; height: 100.0%;">             <b>吉沼</b><br>             令和6年(2024年)6月4日 	つくば市吉沼地内<br>             緯度: 36.1471948<br>             経度: 140.0136323             </div>`)[0];
+                popup_540ef1bbe8bbba68d23355eed4f67754.setContent(html_572129d927b6bf3ecaa17ff4be4cae3a);
+            
+        
+
+        marker_14ce8d105b7edaaadfd1c342522aef4e.bindPopup(popup_540ef1bbe8bbba68d23355eed4f67754)
+        ;
+
+        
+    
+    
+            marker_14ce8d105b7edaaadfd1c342522aef4e.bindTooltip(
+                `<div>
+                     吉沼
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_9b0095aef2b477afafcdedde10c3cfa7 = L.marker(
+                [36.1828128, 140.1086634],
+                {}
+            ).addTo(map_e64c7baece2063f0d7395fc9a8514847);
+        
+    
+            var icon_49f2a7632e8ef69f8546f8396dab38ac = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "deer", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_9b0095aef2b477afafcdedde10c3cfa7.setIcon(icon_49f2a7632e8ef69f8546f8396dab38ac);
+        
+    
+        var popup_6f5396a358fda3f9c5180b14770bab0a = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_6f2aaafd7e98a294856b323af4313562 = $(`<div id="html_6f2aaafd7e98a294856b323af4313562" style="width: 100.0%; height: 100.0%;">             <b>平沢</b><br>             令和6年(2024年)6月22日<br>             緯度: 36.1828128<br>             経度: 140.1086634             </div>`)[0];
+                popup_6f5396a358fda3f9c5180b14770bab0a.setContent(html_6f2aaafd7e98a294856b323af4313562);
+            
+        
+
+        marker_9b0095aef2b477afafcdedde10c3cfa7.bindPopup(popup_6f5396a358fda3f9c5180b14770bab0a)
+        ;
+
+        
+    
+    
+            marker_9b0095aef2b477afafcdedde10c3cfa7.bindTooltip(
+                `<div>
+                     平沢
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>

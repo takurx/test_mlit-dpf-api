@@ -5,16 +5,16 @@ import os
 import sys
 from datetime import datetime
 
-def create_kyun_map(api_url="http://localhost:5000"):
-    """Create an interactive map with Kyun sighting locations"""
+def create_kyon_map(api_url="http://localhost:5000"):
+    """Create an interactive map with kyon sighting locations"""
     try:
-        # Fetch Kyun sighting coordinates from the API
-        response = requests.get(f"{api_url}/api/kyun/coordinates")
+        # Fetch kyon sighting coordinates from the API
+        response = requests.get(f"{api_url}/api/kyon/coordinates")
         response.raise_for_status()
         data = response.json()
         
         if data["count"] == 0:
-            print("No Kyun sighting data available.")
+            print("No kyon sighting data available.")
             return None
         
         # Calculate the center of the map (average of all points)
@@ -50,7 +50,7 @@ def create_kyun_map(api_url="http://localhost:5000"):
         
         # Save the map to an HTML file
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_file = f"kyun_map_{timestamp}.html"
+        output_file = f"kyon_map_{timestamp}.html"
         m.save(output_file)
         
         print(f"Map saved to {output_file}")
@@ -78,12 +78,12 @@ if __name__ == "__main__":
     # Use custom base URL if provided as command line argument
     base_url = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:5000"
     
-    print("🦌 Kyun Sightings Map Generator 🦌")
+    print("🦌 kyon Sightings Map Generator 🦌")
     print("=" * 40)
     print(f"Using API at: {base_url}")
     
     # Create and open the map
-    map_file = create_kyun_map(base_url)
+    map_file = create_kyon_map(base_url)
     if map_file:
         print("\nWould you like to open the map in your browser? (y/n)")
         response = input().strip().lower()

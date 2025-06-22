@@ -11,7 +11,7 @@ st.set_page_config(page_title="Geographic Data Visualization", layout="wide")
 
 # Title and introduction
 st.title("Geographic Data Visualization")
-st.markdown("This app visualizes the geographic points from both a JSON file and Kyun sightings API.")
+st.markdown("This app visualizes the geographic points from both a JSON file and kyon sightings API.")
 
 # Function to load JSON data
 @st.cache_data
@@ -20,9 +20,9 @@ def load_data(file_path):
         data = json.load(f)
     return data
 
-# Function to fetch data from Kyun API
+# Function to fetch data from kyon API
 @st.cache_data(ttl=300)  # Cache data for 5 minutes
-def fetch_kyun_data(api_url="http://localhost:5000/api/kyun/sightings"):
+def fetch_kyon_data(api_url="http://localhost:5000/api/kyon/sightings"):
     try:
         response = requests.get(api_url)
         response.raise_for_status()  # Raise an exception for HTTP errors
@@ -32,7 +32,7 @@ def fetch_kyun_data(api_url="http://localhost:5000/api/kyun/sightings"):
         return None
 
 # Tabs for different data sources
-tab1, tab2, tab3 = st.tabs(["JSON Data", "Kyun API Data", "Combined Map"])
+tab1, tab2, tab3 = st.tabs(["JSON Data", "kyon API Data", "Combined Map"])
 
 # Tab 1: JSON Data
 with tab1:
@@ -82,48 +82,48 @@ with tab1:
     else:
         st.error("No valid location data found in the JSON file.")
 
-# Tab 2: Kyun API Data
+# Tab 2: kyon API Data
 with tab2:
-    # Fetch Kyun API data
-    kyun_data = fetch_kyun_data()
+    # Fetch kyon API data
+    kyon_data = fetch_kyon_data()
     
-    if kyun_data and "data" in kyun_data:
-        # Extract locations from Kyun API data
-        kyun_locations = []
-        for item in kyun_data["data"]:
+    if kyon_data and "data" in kyon_data:
+        # Extract locations from kyon API data
+        kyon_locations = []
+        for item in kyon_data["data"]:
             if "location" in item and "coordinates" in item["location"]:
-                kyun_locations.append({
+                kyon_locations.append({
                     "name": item["location"]["name"],
                     "description": item["description"],
                     "lat": item["location"]["coordinates"]["latitude"],
                     "lon": item["location"]["coordinates"]["longitude"]
                 })
         
-        # Create a DataFrame from the Kyun locations
-        if kyun_locations:
-            df_kyun = pd.DataFrame(kyun_locations)
+        # Create a DataFrame from the kyon locations
+        if kyon_locations:
+            df_kyon = pd.DataFrame(kyon_locations)
             
             # Display data table
-            st.subheader("Kyun Sightings Data Table")
-            st.dataframe(df_kyun)
+            st.subheader("kyon Sightings Data Table")
+            st.dataframe(df_kyon)
             
             # Create the map
-            st.subheader("Kyun Sightings Map Visualization")
+            st.subheader("kyon Sightings Map Visualization")
             
             # Create a map centered around the mean latitude and longitude
-            center_lat = df_kyun["lat"].mean()
-            center_lon = df_kyun["lon"].mean()
+            center_lat = df_kyon["lat"].mean()
+            center_lon = df_kyon["lon"].mean()
             
-            m_kyun = folium.Map(location=[center_lat, center_lon], zoom_start=10)
+            m_kyon = folium.Map(location=[center_lat, center_lon], zoom_start=10)
             
             # Add a title to the map
             title_html = '''
             <h3 align="center" style="font-size:16px"><b>つくば市内キョン目撃情報マップ</b></h3>
             '''
-            m_kyun.get_root().html.add_child(folium.Element(title_html))
+            m_kyon.get_root().html.add_child(folium.Element(title_html))
             
-            # Add points to the map with custom styling for Kyun sightings
-            for _, row in df_kyun.iterrows():
+            # Add points to the map with custom styling for kyon sightings
+            for _, row in df_kyon.iterrows():
                 popup_text = f"""
                 <b>{row['name']}</b><br>
                 {row['description']}<br>
@@ -135,37 +135,37 @@ with tab2:
                     popup=folium.Popup(popup_text, max_width=300),
                     tooltip=row['name'],
                     icon=folium.Icon(icon="paw", prefix="fa", color="orange")
-                ).add_to(m_kyun)
+                ).add_to(m_kyon)
             
             # Display the map
-            folium_static(m_kyun, height=600)
+            folium_static(m_kyon, height=600)
         else:
-            st.error("No valid location data found in the Kyun API response.")
+            st.error("No valid location data found in the kyon API response.")
     else:
-        st.error("Unable to fetch data from Kyun API. Make sure the API server is running.")
+        st.error("Unable to fetch data from kyon API. Make sure the API server is running.")
 
 # Tab 3: Combined Map
 with tab3:
     # Check if we have both datasets
     has_json_data = 'df_json' in locals() and not df_json.empty
-    has_kyun_data = 'df_kyun' in locals() and not df_kyun.empty
+    has_kyon_data = 'df_kyon' in locals() and not df_kyon.empty
     
-    if has_json_data or has_kyun_data:
+    if has_json_data or has_kyon_data:
         st.subheader("Combined Map Visualization")
         
         # Determine center coordinates based on available data
-        if has_json_data and has_kyun_data:
+        if has_json_data and has_kyon_data:
             # Use the average of both datasets
-            all_lats = pd.concat([df_json["lat"], df_kyun["lat"]])
-            all_lons = pd.concat([df_json["lon"], df_kyun["lon"]])
+            all_lats = pd.concat([df_json["lat"], df_kyon["lat"]])
+            all_lons = pd.concat([df_json["lon"], df_kyon["lon"]])
             center_lat = all_lats.mean()
             center_lon = all_lons.mean()
         elif has_json_data:
             center_lat = df_json["lat"].mean()
             center_lon = df_json["lon"].mean()
         else:
-            center_lat = df_kyun["lat"].mean()
-            center_lon = df_kyun["lon"].mean()
+            center_lat = df_kyon["lat"].mean()
+            center_lon = df_kyon["lon"].mean()
         
         # Create a combined map
         m_combined = folium.Map(location=[center_lat, center_lon], zoom_start=9)
@@ -187,9 +187,9 @@ with tab3:
                     icon=folium.Icon(icon="info-sign", prefix="fa", color="blue")
                 ).add_to(m_combined)
         
-        # Add Kyun data points to the map if available
-        if has_kyun_data:
-            for _, row in df_kyun.iterrows():
+        # Add kyon data points to the map if available
+        if has_kyon_data:
+            for _, row in df_kyon.iterrows():
                 popup_text = f"""
                 <b>{row['name']}</b><br>
                 {row['description']}<br>
@@ -212,7 +212,7 @@ with tab3:
             font-size: 14px;">
             <p><b>Data Sources</b></p>
             <p><i class="fa fa-info-sign fa-2x" style="color:blue"></i> JSON Data</p>
-            <p><i class="fa fa-paw fa-2x" style="color:orange"></i> Kyun Sightings</p>
+            <p><i class="fa fa-paw fa-2x" style="color:orange"></i> kyon Sightings</p>
         </div>
         '''
         m_combined.get_root().html.add_child(folium.Element(legend_html))

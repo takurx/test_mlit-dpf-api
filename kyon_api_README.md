@@ -28,7 +28,7 @@ pip install flask requests
 ### サーバーの起動
 
 ```bash
-python kyun_api_server.py
+python kyon_api_server.py
 ```
 
 サーバーはデフォルトで `http://localhost:5000` で起動します。
@@ -36,7 +36,7 @@ python kyun_api_server.py
 ### API利用例の実行
 
 ```bash
-python kyun_api_demo.py
+python kyon_api_demo.py
 ```
 
 ## API エンドポイント
@@ -44,7 +44,7 @@ python kyun_api_demo.py
 ### 1. 全目撃情報の取得
 
 ```
-GET /api/kyun/sightings
+GET /api/kyon/sightings
 ```
 
 全てのキョン目撃情報をJSONで返します。
@@ -52,15 +52,15 @@ GET /api/kyun/sightings
 ### 2. 地域名での検索
 
 ```
-GET /api/kyun/sightings/<location_name>
+GET /api/kyon/sightings/<location_name>
 ```
 
-指定した地域名を含む目撃情報を返します。例: `/api/kyun/sightings/みどりの東`
+指定した地域名を含む目撃情報を返します。例: `/api/kyon/sightings/みどりの東`
 
 ### 3. 地図表示用の座標データ取得
 
 ```
-GET /api/kyun/coordinates
+GET /api/kyon/coordinates
 ```
 
 全ての目撃位置の座標データを、地図表示に適した形式で返します。

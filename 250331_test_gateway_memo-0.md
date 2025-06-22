@@ -2,7 +2,7 @@
 
 ```
 cd ~/LoRaWorks_230822/test_mlit-dpf-api
-python run_kyun_system.py
+python run_kyon_system.py
 ```
 
 ```
@@ -21,14 +21,14 @@ curl -i -X POST http://localhost:8001/services/dpf_service/routes \
 ```
 curl -i -s -X POST http://localhost:8001/services \
    --data name=kyon_service \
-   --data url='http://localhost:5000/api/kyun/sightings'
+   --data url='http://localhost:5000/api/kyon/sightings'
 curl -i -X POST http://localhost:8001/services/kyon_service/routes \
     --data 'paths[]=/kyon_mock' \
     --data name=kyon_route
 ```
 
 ```
-streamlit run folium_kyun_visualization.py
+streamlit run folium_kyon_visualization.py
 ```
 
 

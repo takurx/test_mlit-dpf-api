@@ -7,15 +7,15 @@ def print_json(data):
     print(json.dumps(data, indent=2, ensure_ascii=False))
 
 def test_api(base_url="http://localhost:5000"):
-    """Test the Kyun sightings API endpoints"""
+    """Test the kyon sightings API endpoints"""
     
-    print("🦌 Kyun Sightings API Test 🦌")
+    print("🦌 kyon Sightings API Test 🦌")
     print("=" * 40)
     
     # Test 1: Get all sightings
     print("\n📊 Testing GET all sightings...")
     try:
-        response = requests.get(f"{base_url}/api/kyun/sightings")
+        response = requests.get(f"{base_url}/api/kyon/sightings")
         response.raise_for_status()
         data = response.json()
         print(f"✅ Success! Found {data['count']} sightings")
@@ -28,7 +28,7 @@ def test_api(base_url="http://localhost:5000"):
     # Test 2: Get coordinates for mapping
     print("\n🗺️ Testing GET coordinates for mapping...")
     try:
-        response = requests.get(f"{base_url}/api/kyun/coordinates")
+        response = requests.get(f"{base_url}/api/kyon/coordinates")
         response.raise_for_status()
         data = response.json()
         print(f"✅ Success! Found {data['count']} coordinate entries")
@@ -42,7 +42,7 @@ def test_api(base_url="http://localhost:5000"):
     location = "みどりの東"
     print(f"\n🔍 Testing GET sightings by location: '{location}'...")
     try:
-        response = requests.get(f"{base_url}/api/kyun/sightings/{location}")
+        response = requests.get(f"{base_url}/api/kyon/sightings/{location}")
         response.raise_for_status()
         data = response.json()
         print(f"✅ Success! Found {data['count']} sightings for '{location}'")

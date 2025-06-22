@@ -20,8 +20,8 @@ def parse_wkt_point(wkt):
         }
     return None
 
-def load_kyun_data():
-    """Load Kyun sighting data from CSV and convert to JSON format"""
+def load_kyon_data():
+    """Load kyon sighting data from CSV and convert to JSON format"""
     data = []
     
     try:
@@ -46,28 +46,28 @@ def load_kyun_data():
                 else:
                     logger.warning(f"Skipping malformed row: {row}")
         
-        logger.info(f"Successfully loaded {len(data)} Kyun sighting records")
+        logger.info(f"Successfully loaded {len(data)} kyon sighting records")
         return data
     except Exception as e:
         logger.error(f"Error loading CSV data: {str(e)}")
         return []
 
 # Global variable to store the data
-KYUN_DATA = load_kyun_data()
+kyon_DATA = load_kyon_data()
 
-@app.route('/api/kyun/sightings', methods=['GET'])
+@app.route('/api/kyon/sightings', methods=['GET'])
 def get_all_sightings():
-    """Return all Kyun sighting data"""
+    """Return all kyon sighting data"""
     return jsonify({
         "status": "success",
-        "count": len(KYUN_DATA),
-        "data": KYUN_DATA
+        "count": len(kyon_DATA),
+        "data": kyon_DATA
     })
 
-@app.route('/api/kyun/sightings/<location_name>', methods=['GET'])
+@app.route('/api/kyon/sightings/<location_name>', methods=['GET'])
 def get_sighting_by_location(location_name):
-    """Return Kyun sighting data filtered by location name"""
-    filtered_data = [item for item in KYUN_DATA if location_name in item["location"]["name"]]
+    """Return kyon sighting data filtered by location name"""
+    filtered_data = [item for item in kyon_DATA if location_name in item["location"]["name"]]
     
     return jsonify({
         "status": "success",
@@ -75,9 +75,9 @@ def get_sighting_by_location(location_name):
         "data": filtered_data
     })
 
-@app.route('/api/kyun/coordinates', methods=['GET'])
+@app.route('/api/kyon/coordinates', methods=['GET'])
 def get_all_coordinates():
-    """Return all Kyun sighting coordinates for mapping"""
+    """Return all kyon sighting coordinates for mapping"""
     coordinates = [
         {
             "name": item["location"]["name"],
@@ -85,7 +85,7 @@ def get_all_coordinates():
             "latitude": item["location"]["coordinates"]["latitude"],
             "description": item["description"]
         }
-        for item in KYUN_DATA
+        for item in kyon_DATA
     ]
     
     return jsonify({
@@ -95,5 +95,5 @@ def get_all_coordinates():
     })
 
 if __name__ == '__main__':
-    logger.info("Starting Kyun Sightings API Server...")
+    logger.info("Starting kyon Sightings API Server...")
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -28,16 +28,16 @@ def check_dependencies():
         return False
 
 def main():
-    """Run the complete Kyun sighting information system"""
+    """Run the complete kyon sighting information system"""
     if not check_dependencies():
         return
     
-    print_header("つくばキョン目撃情報システム (Tsukuba Kyun Sighting System)")
+    print_header("つくばキョン目撃情報システム (Tsukuba kyon Sighting System)")
     
     # Start the API server as a background process
     print("\n🚀 Starting the API server...")
     api_process = subprocess.Popen(
-        [sys.executable, "kyun_api_server.py"],
+        [sys.executable, "kyon_api_server.py"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True
@@ -59,19 +59,19 @@ def main():
         
         # Run the demo script
         print("\n📊 Running API demo...")
-        subprocess.run([sys.executable, "kyun_api_demo.py"], check=True)
+        subprocess.run([sys.executable, "kyon_api_demo.py"], check=True)
         
         # Generate the map
         print("\n🗺️ Generating map visualization...")
-        subprocess.run([sys.executable, "kyun_map_visualizer.py"], check=True)
+        subprocess.run([sys.executable, "kyon_map_visualizer.py"], check=True)
         
         # Provide instructions
         print_header("システムが正常に動作しています (System is running normally)")
         print("\nAPI Server is running at: http://localhost:5000")
         print("\nAvailable endpoints:")
-        print("  - http://localhost:5000/api/kyun/sightings")
-        print("  - http://localhost:5000/api/kyun/coordinates")
-        print("  - http://localhost:5000/api/kyun/sightings/<location_name>")
+        print("  - http://localhost:5000/api/kyon/sightings")
+        print("  - http://localhost:5000/api/kyon/coordinates")
+        print("  - http://localhost:5000/api/kyon/sightings/<location_name>")
         
         print("\nPress Ctrl+C to stop the system when finished.")
         
@@ -94,7 +94,7 @@ def main():
                 os.kill(api_process.pid, signal.SIGTERM)
             api_process.wait(timeout=5)
         
-        print("\n✨ System shutdown complete. Thank you for using the Kyun Sighting System!")
+        print("\n✨ System shutdown complete. Thank you for using the kyon Sighting System!")
 
 if __name__ == "__main__":
     main()

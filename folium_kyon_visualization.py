@@ -70,7 +70,8 @@ def fetch_mlit_data(keyword, lat, lon, range_val, api_key):
 #def fetch_kyon_data(api_url="http://localhost:5000/api/kyon/sightings"):
 #def fetch_kyon_data(api_url="http://localhost:8000/kyon_mock/"):
 #def fetch_kyon_data(api_url="http://localhost:8000/kyon_mock/api/kyon/sightings/"):
-def fetch_kyon_data(api_url="http://localhost:8000/kyon_mock/api/kyon/sightings"):
+# def fetch_kyon_data(api_url="http://localhost:8000/kyon_mock/api/kyon/sightings"):
+def fetch_kyon_data(api_url="http://localhost:8000/kyon_mock/sightings"):
     try:
         response = requests.get(api_url)    
         response.raise_for_status()  # Raise an exception for HTTP errors
